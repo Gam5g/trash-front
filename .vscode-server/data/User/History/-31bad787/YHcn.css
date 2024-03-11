@@ -1,0 +1,140 @@
+.loginbutton {
+    margin-top : 8px;
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    text-align: center;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+/* 마우스 호버 시 배경색 변화 */
+.loginbutton:hover {
+    background-color: #45a049;
+}
+
+.registerbutton {
+    margin-top : 8px;
+    margin-left : 8px;
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #FFA500;
+    color: white;
+    text-align: center;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+.registerbutton:disabled {
+    background-color: #808080;
+    cursor:not-allowed;
+}
+/* 마우스 호버 시 배경색 변화 */
+.registerbutton:hover {
+    background-color: #FF8C00;
+}
+
+.writebutton {
+    margin-top: 20px;
+    margin-left : 8px;
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #008CBA;
+    color: white;
+    text-align: center;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+/* 마우스 호버 시 배경색 변화 */
+.writebutton:hover {
+    background-color: #0073e6;
+}
+
+body {
+    height: 100vh;
+    display:flex;
+    justify-content: center;
+    align-items:center;
+}
+
+.cancelbutton {
+    margin-top: 20px;
+    margin-left : 8px;
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #6d6d6d;
+    color: white;
+    text-align: center;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.MoveTopBtn {
+    position: fixed;
+    background: transparent;
+    border: none;
+    bottom:20px;
+    right:20px;
+    width: 60px;
+    height: 60px;
+    background-image: url('../public/images/upArrow.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    transition: background-image 0.3s ease-in-out;
+    z-index:7;
+}
+
+.MoveTopBtn:hover {
+    background-image: url('../public/images/upArrow_hover.png');
+    cursor:pointer;
+}
+
+.disabled-write-button {
+    margin-top: 20px;
+    margin-left : 8px;
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #6d6d6d;
+    color: white;
+    text-align: center;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+    cursor: pointer;
+    pointer-events: none;
+    outline: none;
+}
+
+.disabled-write-button:hover::before {
+    content: "로그인이 필요합니다.";
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    bottom: calc(100% + 5px);
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 14px;
+    white-space: nowrap;
+    cursor: pointer;
+}

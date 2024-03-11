@@ -1,0 +1,18 @@
+2024-03-03 23:43:09.019 [info] 
+
+
+
+
+2024-03-03 23:43:09.037 [info] Extension host agent started.
+2024-03-03 23:43:09.142 [info] [127.0.0.1][42a8bff1][ManagementConnection] New connection established.
+2024-03-03 23:43:09.398 [info] [127.0.0.1][8a30a21f][ExtensionHostConnection] New connection established.
+2024-03-03 23:43:09.407 [info] [127.0.0.1][8a30a21f][ExtensionHostConnection] <185> Launched Extension Host Process.
+2024-03-03 23:59:23.050 [info] Getting Manifest... esbenp.prettier-vscode
+2024-03-03 23:59:23.199 [info] Installing extension: esbenp.prettier-vscode
+2024-03-03 23:59:24.485 [info] Extension signature verification: esbenp.prettier-vscode. Verification status: Verified.
+2024-03-03 23:59:24.598 [info] Extracted extension to /home/khj415/.vscode-server/extensions/.d1bfc464-cf74-4303-bcf2-3bcb36839a57: esbenp.prettier-vscode
+2024-03-03 23:59:24.604 [info] Renamed to /home/khj415/.vscode-server/extensions/esbenp.prettier-vscode-10.1.0
+2024-03-03 23:59:24.607 [info] Extracting extension completed. esbenp.prettier-vscode
+2024-03-03 23:59:24.613 [info] Extension installed successfully: esbenp.prettier-vscode
+2024-03-04 02:08:55.886 [info] [127.0.0.1][42a8bff1][ManagementConnection] The client has disconnected gracefully, so the connection will be disposed.
+2024-03-04 02:08:55.968 [info] [127.0.0.1][8a30a21f][ExtensionHostConnection] <185> Extension Host Process exited with code: 0, signal: null.
