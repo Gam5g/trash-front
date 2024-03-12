@@ -7,8 +7,10 @@ import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
   <React.StrictMode>
-    <Header />
-    <App />
+    <div style={{ paddingTop: "200px" }}>
+      <Header />
+      <App />
+    </div>
   </React.StrictMode>,
   document.getElementById("root")
 );

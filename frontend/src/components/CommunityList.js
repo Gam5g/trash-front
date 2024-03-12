@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { HiXCircle } from "react-icons/hi";
-import Paging from "./Paging";
-import "../../../Button.css";
+import Paging from "../container/pages/Community/Paging";
+import "../Button.css";
 
 const CommunityList = ({ posts, title, postType, Btn }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -16,7 +15,7 @@ const CommunityList = ({ posts, title, postType, Btn }) => {
   const navigate = useNavigate();
 
   const NavigateToWrite = () => {
-    navigate(`/community/write?postType=${postType}`);
+    navigate(`/community-${postType}/write`);
   };
 
   const navigateToNanum = () => {
@@ -110,18 +109,10 @@ const CommunityList = ({ posts, title, postType, Btn }) => {
               type="text"
               placeholder="입력"
               className="community-search-input"
-              value={query}
               onChange={(e) => setQuery(e.target.value)}
               onFocus={() => setIsFocused(true)}
               onBlur={() => setIsFocused(false)}
             />
-            {isFocused && query && query.length > 0 && (
-              <HiXCircle
-                className="community-clear-search-button"
-                onClick={() => setQuery("")}
-                style={{ color: "gray" }}
-              />
-            )}
             <button className="searchbutton" onClick={handleSearch}>
               검색
             </button>

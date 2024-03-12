@@ -1,5 +1,5 @@
 import React from "react";
-import CommunityList from "./CommunityList";
+import CommunityList from "../../../components/CommunityList";
 import { BunriPosts } from "./BunriPosts";
 
 const CommunityBunriList = () => {

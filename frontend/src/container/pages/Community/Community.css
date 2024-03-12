@@ -72,14 +72,7 @@
 .NotDrag {
     user-select: none;
   }
-.community-clear-search-button {
-    position: absolute;
-    top: 175px;
-    right: 350px;
-    cursor:pointer;
-    padding-right:10px;
-    z-index:1;
-}
+
 .searchbutton {
     display: inline-block;
     padding: 10px 20px;

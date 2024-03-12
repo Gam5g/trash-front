@@ -12,7 +12,7 @@ function SearchDetailForm() {
   const searchResult = Trash.find((item) => item.name === query);
 
   return (
-    <div className="NotDrag" style={{ paddingTop: "50px" }}>
+    <div className="NotDrag">
       {searchResult ? (
         <div>
           <h1>검색한 내용의 결과입니다</h1>

@@ -81,7 +81,7 @@ function MainForm() {
     navigate(`/search?query=${encodeURIComponent(selectedQuery)}`);
   };
   return (
-    <div className="NotDrag">
+    <div className="NotDrag" style={{ paddingTop: "50px" }}>
       <h2>찾고자 하는 쓰레기를 검색해보세요!</h2>
       <div className="trash-search-container" ref={topRef}>
         <form

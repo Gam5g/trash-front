@@ -1,11 +1,11 @@
 import React, { useRef, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import "./Community.css";
+import "../container/pages/Community/Community.css";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
-const CommunityWrite = () => {
+const CommunityWrite = ({ posttype }) => {
   const [userInfo, setUserInfo] = useState({
     title: "",
     content: "",
@@ -124,6 +124,12 @@ const CommunityWrite = () => {
           ></ReactQuill>
           {ContentError && <p className="error-message">{ContentError}</p>}
         </div>
+        {posttype === "nanum" && (
+          <label>
+            <input type="checkbox" name="nanum" value="나눔 완료" />
+            나눔 완료
+          </label>
+        )}
         <button className="writebutton" type="submit">
           등록
         </button>

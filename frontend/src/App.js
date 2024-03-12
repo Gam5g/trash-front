@@ -9,7 +9,8 @@ import FindPassword from "./container/pages/FindPassword";
 import Station from "./container/pages/Station";
 import CommunityNanumList from "./container/pages/Community/CommunityNanumList";
 import CommunityBunriList from "./container/pages/Community/CommunityBunriList";
-import CommunityWrite from "./container/pages/Community/CommunityWrite";
+import CommunityNanumWrite from "./container/pages/Community/CommunityNanumWrite";
+import CommunityBunriWrite from "./container/pages/Community/CommunityBunriWrite";
 import CommunityDetail from "./container/pages/Community/CommunityDetail";
 import MedicineForm from "./container/pages/MedicineForm";
 import SearchDetailForm from "./container/pages/SearchDetailForm";
@@ -29,7 +30,14 @@ function App() {
           <Route path="/community-nanum" element={<CommunityNanumList />} />
           <Route path="/community-bunri" element={<CommunityBunriList />} />
           <Route path="/community/:id" element={<CommunityDetail />} />
-          <Route path="/community/write" element={<CommunityWrite />} />
+          <Route
+            path="/community-nanum/write"
+            element={<CommunityNanumWrite />}
+          />
+          <Route
+            path="/community-bunri/write"
+            element={<CommunityBunriWrite />}
+          />
           <Route path="/medicine-location" element={<MedicineForm />} />
         </Routes>
       </Router>
