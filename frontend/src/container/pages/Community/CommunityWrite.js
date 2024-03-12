@@ -14,6 +14,7 @@ const CommunityWrite = () => {
   const [ContentError, setContentError] = useState("");
 
   const onChangeTitle = (e) => {
+    setTitleError("");
     setUserInfo({
       ...userInfo,
       [e.target.name]: e.target.value,
@@ -21,6 +22,7 @@ const CommunityWrite = () => {
   };
 
   const onChangeContent = (content) => {
+    setContentError("");
     setUserInfo({
       ...userInfo,
       content: content,
@@ -65,20 +67,26 @@ const CommunityWrite = () => {
   const onSubmit = async (e) => {
     try {
       e.preventDefault();
-      if (userInfo.title.length < 0) {
+
+      if (userInfo.title.trim() === "") {
         setTitleError("제목은 필수 항목입니다.");
-        return;
       }
-      if (userInfo.content.length < 10) {
+
+      if (userInfo.content.trim().length < 10) {
         setContentError("내용은 최소 10자 이상이어야 합니다.");
-        return;
       }
-      const res = await axios.post(`url`, {
-        title: userInfo.title,
-        content: userInfo.content,
-      });
-      if (res.data.success === true) {
-        navigate("/post");
+
+      if (
+        userInfo.title.trim() !== "" &&
+        userInfo.content.trim().length >= 10
+      ) {
+        const res = await axios.post(`url`, {
+          title: userInfo.title,
+          content: userInfo.content,
+        });
+        if (res.data.success === true) {
+          navigate("/post");
+        }
       }
     } catch (error) {
       throw error;
@@ -102,7 +110,6 @@ const CommunityWrite = () => {
           />
           {TitleError && <p className="error-message">{TitleError}</p>}
         </div>
-
         <div style={{ userSelect: "none" }}>
           <ReactQuill
             key="quill"

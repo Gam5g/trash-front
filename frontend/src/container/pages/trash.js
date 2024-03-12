@@ -26,6 +26,14 @@ export const Trash = [
   {
     id: 4,
     name: "폐의약품",
+    big: "기타",
+    small: "기타",
+    rules: "가까운 보건소나 약국, 아파트 관리사무소 등에 버려주세요",
+    image: "/images/search/old_medicine.jpg",
+  },
+  {
+    id: 5,
+    name: "폐건전지",
     big: "건전지",
     small: "건전지",
     rules: "저러쿵",

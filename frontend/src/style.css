@@ -166,6 +166,15 @@ header {
   }
 }
 
+.hamburger-menu {
+  padding-right : 30px;
+  width : 70%;
+  height : 70%
+}
+.separator {
+ padding-left: 20px;
+ padding-right : 20px;
+}
 .trash-search-container {
   display: flex;
   align-items: center;

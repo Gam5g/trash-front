@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./style.css";
+import { RxHamburgerMenu } from "react-icons/rx";
 import { useMediaQuery } from "react-responsive";
 
 const Header = () => {
@@ -32,7 +33,7 @@ const Header = () => {
             }}
             style={{ cursor: "pointer" }}
           >
-            ☰
+            <RxHamburgerMenu className="hamburger-menu" />
           </div>
           <div className="mobile-menu">
             <div className="side-menu" style={{ width: width }}>
@@ -50,10 +51,16 @@ const Header = () => {
                   )}
                 </li>
                 <li>
-                  <a href="/medicine-location">폐의약품 위치</a>
+                  <a style={{ color: "darkgray" }}>커뮤니티</a>
                 </li>
                 <li>
-                  <a href="/community">커뮤니티</a>
+                  <a href="/community-nanum">나눔</a>
+                </li>
+                <li>
+                  <a href="/community-bunri">분리수거</a>
+                </li>
+                <li>
+                  <a href="/medicine-location">폐의약품 위치</a>
                 </li>
               </ul>
             </div>
@@ -64,7 +71,7 @@ const Header = () => {
           </div>
         </>
       ) : (
-        <nav className={"navbar__menu"}>
+        <nav className={"navbar__menu"} style={{ fontFamily: "" }}>
           <ul>
             <li>
               {isLoggedIn ? (
@@ -73,11 +80,19 @@ const Header = () => {
                 <a href="/login">로그인</a>
               )}
             </li>
+            <span className="separator">|</span>
             <li>
-              <a href="/medicine-location">폐의약품 위치</a>
+              <a style={{ color: "darkgray" }}>커뮤니티</a>
             </li>
             <li>
-              <a href="/community">커뮤니티</a>
+              <a href="/community-nanum">나눔</a>
+            </li>
+            <li>
+              <a href="/community-bunri">분리수거</a>
+            </li>
+            <span className="separator">|</span>
+            <li>
+              <a href="/medicine-location">폐의약품 위치</a>
             </li>
           </ul>
         </nav>

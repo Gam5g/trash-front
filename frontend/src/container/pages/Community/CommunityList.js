@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { HiXCircle } from "react-icons/hi";
-import "./Community.css";
-import { Posts } from "./posts";
 import Paging from "./Paging";
+import "../../../Button.css";
 
-const CommunityList = () => {
+const CommunityList = ({ posts, title, postType, Btn }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [selectedPost, setSelectedPost] = useState(null);
   const [searchResults, setSearchResults] = useState([]);
@@ -17,7 +16,15 @@ const CommunityList = () => {
   const navigate = useNavigate();
 
   const NavigateToWrite = () => {
-    navigate("/community/write");
+    navigate(`/community/write?postType=${postType}`);
+  };
+
+  const navigateToNanum = () => {
+    navigate(`/community-nanum/`);
+  };
+
+  const navigateToBunri = () => {
+    navigate(`/community-bunri/`);
   };
 
   const handleLoginSuccess = () => {
@@ -26,7 +33,7 @@ const CommunityList = () => {
 
   const handlePostClick = (post) => {
     setSelectedPost(post);
-    navigate(`/community/${post.id}`);
+    navigate(`/community/${postType}/${post.id}`);
   };
 
   const handlePageChange = (page) => {
@@ -42,7 +49,7 @@ const CommunityList = () => {
   };
 
   const handleSearch = () => {
-    const filtered = Posts.filter((post) => {
+    const filtered = posts.filter((post) => {
       if (searchBy === "title") {
         return post.title.includes(query);
       } else if (searchBy === "author") {
@@ -76,13 +83,13 @@ const CommunityList = () => {
   };
 
   const paginatedPosts = sortedPostsByCriteria(
-    searchResults.length > 0 ? searchResults : Posts
+    searchResults.length > 0 ? searchResults : posts
   ).slice((page - 1) * 10, page * 10);
 
   return (
     <>
-      <div className="NotDrag">
-        <h1>게시글 목록</h1>
+      <div className="NotDrag" style={{ paddingTop: "50px" }}>
+        <h1>{title} 게시글 목록</h1>
         <div className="search-controls">
           <select
             className="sort-container"
@@ -120,6 +127,20 @@ const CommunityList = () => {
             </button>
           </div>
         </div>
+        <div>
+          <button
+            onClick={navigateToNanum}
+            className={Btn === "activeBtn" ? "activeBtn" : "unactiveBtn"}
+          >
+            나눔
+          </button>
+          <button
+            onClick={navigateToBunri}
+            className={Btn === "activeBtn" ? "activeBtn" : "unactiveBtn"}
+          >
+            분리수거
+          </button>
+        </div>
         {paginatedPosts.length > 0 && (
           <table className="table-container">
             <thead>
@@ -136,7 +157,11 @@ const CommunityList = () => {
               {paginatedPosts.map((post) => (
                 <tr key={post.id} onClick={() => handlePostClick(post)}>
                   <td>{post.id}</td>
-                  <td>{post.title}</td>
+                  <td style={{ maxWidth: "250px" }}>
+                    {post.title.length > 20
+                      ? post.title.slice(0, 20) + "..."
+                      : post.title}
+                  </td>
                   <td>{post.author}</td>
                   <td>{post.views}</td>
                   <td>{post.likes}</td>
@@ -160,7 +185,7 @@ const CommunityList = () => {
         )}
         <Paging
           totalItemsCount={
-            searchResults.length > 0 ? searchResults.length : Posts.length
+            searchResults.length > 0 ? searchResults.length : posts.length
           }
           onPageChange={handlePageChange}
         />

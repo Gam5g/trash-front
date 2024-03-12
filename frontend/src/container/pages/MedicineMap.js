@@ -140,7 +140,6 @@ const MedicineMap = () => {
 
   return (
     <div className="NotDrag">
-      <h2>대구시의 폐의약품 수거함 위치</h2>
       <div id="map" style={{ width: "500px", height: "500px" }}></div>
       <button onClick={() => toggleMarker("서구")}>서구</button>
       <button onClick={() => toggleMarker("달서구")}>달서구</button>

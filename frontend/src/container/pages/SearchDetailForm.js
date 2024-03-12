@@ -12,24 +12,27 @@ function SearchDetailForm() {
   const searchResult = Trash.find((item) => item.name === query);
 
   return (
-    <div className="NotDrag" style={{ paddingTop: "150px" }}>
+    <div className="NotDrag" style={{ paddingTop: "50px" }}>
       {searchResult ? (
         <div>
-          <h2>{searchResult.name}</h2>
-          <img src={searchResult.image} alt={searchResult.name} />
-          <p>큰 분류: {searchResult.big}</p>
-          <p>작은 분류: {searchResult.small}</p>
-          <p>규칙: {searchResult.rules}</p>
-          {searchResult.name === "폐의약품" && (
-            <div>
+          <h1>검색한 내용의 결과입니다</h1>
+          <div>
+            <h2>{searchResult.name}</h2>
+            <img src={searchResult.image} alt={searchResult.name} />
+            <p>큰 분류: {searchResult.big}</p>
+            <p>작은 분류: {searchResult.small}</p>
+            <p>규칙: {searchResult.rules}</p>
+            {searchResult.name === "폐의약품" && (
               <div>
-                <h1>근처에 폐의약품 수거함을 찾아보세요</h1>
+                <div>
+                  <h1>근처에 폐의약품 수거함을 찾아보세요</h1>
+                </div>
+                <div>
+                  <Medicine />
+                </div>
               </div>
-              <div>
-                <Medicine />
-              </div>
-            </div>
-          )}
+            )}
+          </div>
         </div>
       ) : (
         <div>

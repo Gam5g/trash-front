@@ -7,10 +7,11 @@ import LoginForm from "./container/pages/LoginForm";
 import FindID from "./container/pages/FindID";
 import FindPassword from "./container/pages/FindPassword";
 import Station from "./container/pages/Station";
-import CommunityList from "./container/pages/Community/CommunityList";
+import CommunityNanumList from "./container/pages/Community/CommunityNanumList";
+import CommunityBunriList from "./container/pages/Community/CommunityBunriList";
 import CommunityWrite from "./container/pages/Community/CommunityWrite";
 import CommunityDetail from "./container/pages/Community/CommunityDetail";
-import MedicineMap from "./container/pages/MedicineMap";
+import MedicineForm from "./container/pages/MedicineForm";
 import SearchDetailForm from "./container/pages/SearchDetailForm";
 
 function App() {
@@ -25,10 +26,11 @@ function App() {
           <Route path="/find-password" element={<FindPassword />} />
           <Route path="/station" element={<Station />} />
           <Route path="/search" element={<SearchDetailForm />} />
-          <Route path="/community" element={<CommunityList />} />
+          <Route path="/community-nanum" element={<CommunityNanumList />} />
+          <Route path="/community-bunri" element={<CommunityBunriList />} />
           <Route path="/community/:id" element={<CommunityDetail />} />
           <Route path="/community/write" element={<CommunityWrite />} />
-          <Route path="/medicine-location" element={<MedicineMap />} />
+          <Route path="/medicine-location" element={<MedicineForm />} />
         </Routes>
       </Router>
     </div>
