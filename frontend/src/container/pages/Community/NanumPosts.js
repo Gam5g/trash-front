@@ -7,6 +7,7 @@ export const NanumPosts = [
     views: 120,
     date: "2024-02-13",
     likes: 5,
+    nanum: "O",
   },
   {
     id: 2,
@@ -16,6 +17,7 @@ export const NanumPosts = [
     views: 5,
     date: "2024-02-14",
     likes: 7,
+    nanum: "O",
   },
   {
     id: 3,
@@ -25,6 +27,7 @@ export const NanumPosts = [
     views: 10,
     date: "2024-02-13",
     likes: 5,
+    nanum: "O",
   },
   {
     id: 4,
@@ -34,6 +37,7 @@ export const NanumPosts = [
     views: 5,
     date: "2024-02-14",
     likes: 7,
+    nanum: "O",
   },
   {
     id: 5,
@@ -43,6 +47,7 @@ export const NanumPosts = [
     views: 10,
     date: "2024-02-13",
     likes: 5,
+    nanum: "O",
   },
   {
     id: 6,
@@ -52,6 +57,7 @@ export const NanumPosts = [
     views: 2424,
     date: "2024-02-28",
     likes: 345,
+    nanum: "O",
   },
   {
     id: 7,
@@ -61,6 +67,7 @@ export const NanumPosts = [
     views: 10,
     date: "2024-02-13",
     likes: 5,
+    nanum: "X",
   },
   {
     id: 8,
@@ -70,6 +77,7 @@ export const NanumPosts = [
     views: 5,
     date: "2024-02-14",
     likes: 7,
+    nanum: "X",
   },
   {
     id: 9,
@@ -79,6 +87,7 @@ export const NanumPosts = [
     views: 10,
     date: "2024-02-13",
     likes: 5,
+    nanum: "X",
   },
   {
     id: 10,
@@ -88,6 +97,7 @@ export const NanumPosts = [
     views: 5,
     date: "2024-02-14",
     likes: 7,
+    nanum: "X",
   },
   {
     id: 11,
@@ -97,6 +107,7 @@ export const NanumPosts = [
     views: 10,
     date: "2024-02-13",
     likes: 5,
+    nanum: "X",
   },
   {
     id: 12,
@@ -106,5 +117,6 @@ export const NanumPosts = [
     views: 5,
     date: "2024-02-14",
     likes: 7,
+    nanum: "X",
   },
 ];

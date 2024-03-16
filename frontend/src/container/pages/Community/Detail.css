@@ -62,3 +62,8 @@
     background-color: #0056b3;
   }
   
+  .post-content {
+    font-size: 16px; 
+    line-height: 1.6;
+    margin-top: 20px;
+  }

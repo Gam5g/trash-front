@@ -159,3 +159,12 @@ body {
     white-space: nowrap;
     cursor: pointer;
 }
+
+@font-face {
+    font-family: 'Pretendard-Bold';
+    src: url("fonts/Pretendard-Bold.woff2") format('truetype');
+  }
+  
+.unactiveBtn, .activeBtn, .searchbutton, .writebutton, .disabled-write-button {
+    font-family: 'Pretendard-Bold';
+}

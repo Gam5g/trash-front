@@ -35,13 +35,16 @@ const CommunityDetail = ({ posts, postsType }) => {
       {post && (
         <div className="post">
           <h2>{post.title}</h2>
-          <h3>작성자: {post.author}</h3>
-          <p>{post.content}</p>
-          <div className="info">
-            <p>조회수: {post.views}</p>
-            <p>작성일: {post.date}</p>
-            <p>좋아요: {post.likes}</p>
+          <div className="post-info">
+            <p>
+              작성자: {post.author} | 조회수: {post.views} | 작성일: {post.date}{" "}
+              | 좋아요: {post.likes} |{" "}
+              {postsType === "nanum" && (
+                <span>나눔 완료 상태: {post.nanum}</span>
+              )}
+            </p>
           </div>
+          <p className="post-content">{post.content}</p>
         </div>
       )}
       <div className="buttons">

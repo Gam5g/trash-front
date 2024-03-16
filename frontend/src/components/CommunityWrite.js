@@ -29,6 +29,13 @@ const CommunityWrite = ({ posttype }) => {
     });
   };
 
+  const onChangeNanum = (nanum) => {
+    setUserInfo({
+      ...userInfo,
+      nanum: nanum,
+    });
+  };
+
   const modules = useMemo(() => {
     return {
       toolbar: {
@@ -126,7 +133,12 @@ const CommunityWrite = ({ posttype }) => {
         </div>
         {posttype === "nanum" && (
           <label>
-            <input type="checkbox" name="nanum" value="나눔 완료" />
+            <input
+              type="checkbox"
+              name="nanum"
+              value="나눔 완료"
+              onChange={onChangeNanum}
+            />
             나눔 완료
           </label>
         )}

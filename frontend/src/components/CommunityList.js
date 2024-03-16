@@ -57,6 +57,9 @@ const CommunityList = ({ posts, postType }) => {
   };
 
   const sortedPostsByCriteria = (posts) => {
+    if (sortBy === "nanum") {
+      return posts.filter((post) => post.nanum);
+    }
     return [...posts].sort((a, b) => {
       switch (sortBy) {
         case "page":
@@ -90,6 +93,7 @@ const CommunityList = ({ posts, postType }) => {
                 <th>조회수</th>
                 <th>추천수</th>
                 <th>작성날짜</th>
+                {postType === "nanum" && <th>나눔 완료</th>}
               </tr>
             </thead>
             <tbody>
@@ -97,14 +101,15 @@ const CommunityList = ({ posts, postType }) => {
                 <tr key={post.id} onClick={() => handlePostClick(post)}>
                   <td>{post.id}</td>
                   <td>
-                    {post.title.length > 14
-                      ? post.title.slice(0, 14) + "..."
+                    {post.title.length > 12
+                      ? post.title.slice(0, 12) + "..."
                       : post.title}
                   </td>
                   <td>{post.author}</td>
                   <td>{post.views}</td>
                   <td>{post.likes}</td>
                   <td>{post.date}</td>
+                  {postType === "nanum" && <td>{post.nanum}</td>}
                 </tr>
               ))}
             </tbody>
@@ -120,6 +125,7 @@ const CommunityList = ({ posts, postType }) => {
             <option value="likes">추천순 정렬</option>
             <option value="views">조회순 정렬</option>
             <option value="date">작성날짜순 정렬</option>
+            <option value="nanum">나눔완료순 정렬</option>
           </select>
           <div className="search-container">
             <select value={searchBy} onChange={handleSearchChange}>
