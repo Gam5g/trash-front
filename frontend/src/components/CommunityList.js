@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Paging from "../container/pages/Community/Paging";
 import "../Button.css";
 
-const CommunityList = ({ posts, title, postType, Btn }) => {
+const CommunityList = ({ posts, postType }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [selectedPost, setSelectedPost] = useState(null);
   const [searchResults, setSearchResults] = useState([]);
@@ -18,21 +18,13 @@ const CommunityList = ({ posts, title, postType, Btn }) => {
     navigate(`/community-${postType}/write`);
   };
 
-  const navigateToNanum = () => {
-    navigate(`/community-nanum/`);
-  };
-
-  const navigateToBunri = () => {
-    navigate(`/community-bunri/`);
-  };
-
   const handleLoginSuccess = () => {
     setIsLoggedIn(true);
   };
 
   const handlePostClick = (post) => {
     setSelectedPost(post);
-    navigate(`/community/${postType}/${post.id}`);
+    navigate(`/community-${postType}/${post.id}`);
   };
 
   const handlePageChange = (page) => {
@@ -87,9 +79,38 @@ const CommunityList = ({ posts, title, postType, Btn }) => {
 
   return (
     <>
-      <div className="NotDrag" style={{ paddingTop: "50px" }}>
-        <h1>{title} 게시글 목록</h1>
-        <div className="search-controls">
+      <div className="NotDrag">
+        {paginatedPosts.length > 0 && (
+          <table className="table-container">
+            <thead>
+              <tr>
+                <th>글 번호</th>
+                <th>제목</th>
+                <th>글쓴이</th>
+                <th>조회수</th>
+                <th>추천수</th>
+                <th>작성날짜</th>
+              </tr>
+            </thead>
+            <tbody>
+              {paginatedPosts.map((post) => (
+                <tr key={post.id} onClick={() => handlePostClick(post)}>
+                  <td>{post.id}</td>
+                  <td>
+                    {post.title.length > 14
+                      ? post.title.slice(0, 14) + "..."
+                      : post.title}
+                  </td>
+                  <td>{post.author}</td>
+                  <td>{post.views}</td>
+                  <td>{post.likes}</td>
+                  <td>{post.date}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+        <div className="search-controls" style={{ paddingTop: "20px" }}>
           <select
             className="sort-container"
             value={sortBy}
@@ -118,50 +139,6 @@ const CommunityList = ({ posts, title, postType, Btn }) => {
             </button>
           </div>
         </div>
-        <div>
-          <button
-            onClick={navigateToNanum}
-            className={Btn === "activeBtn" ? "activeBtn" : "unactiveBtn"}
-          >
-            나눔
-          </button>
-          <button
-            onClick={navigateToBunri}
-            className={Btn === "activeBtn" ? "activeBtn" : "unactiveBtn"}
-          >
-            분리수거
-          </button>
-        </div>
-        {paginatedPosts.length > 0 && (
-          <table className="table-container">
-            <thead>
-              <tr>
-                <th>글 번호</th>
-                <th>제목</th>
-                <th>글쓴이</th>
-                <th>조회수</th>
-                <th>추천수</th>
-                <th>작성날짜</th>
-              </tr>
-            </thead>
-            <tbody>
-              {paginatedPosts.map((post) => (
-                <tr key={post.id} onClick={() => handlePostClick(post)}>
-                  <td>{post.id}</td>
-                  <td style={{ maxWidth: "250px" }}>
-                    {post.title.length > 20
-                      ? post.title.slice(0, 20) + "..."
-                      : post.title}
-                  </td>
-                  <td>{post.author}</td>
-                  <td>{post.views}</td>
-                  <td>{post.likes}</td>
-                  <td>{post.date}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        )}
         {isLoggedIn ? (
           <button className="writebutton" onClick={NavigateToWrite}>
             글쓰기
@@ -174,12 +151,14 @@ const CommunityList = ({ posts, title, postType, Btn }) => {
             글쓰기
           </button>
         )}
-        <Paging
-          totalItemsCount={
-            searchResults.length > 0 ? searchResults.length : posts.length
-          }
-          onPageChange={handlePageChange}
-        />
+        <div>
+          <Paging
+            totalItemsCount={
+              searchResults.length > 0 ? searchResults.length : posts.length
+            }
+            onPageChange={handlePageChange}
+          />
+        </div>
       </div>
     </>
   );

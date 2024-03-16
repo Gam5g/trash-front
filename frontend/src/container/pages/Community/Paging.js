@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Pagination from "react-js-pagination";
 import "./Paging.css";
 
-const Paging = ({ totalItemsCount, onPageChange}) => {
+const Paging = ({ totalItemsCount, onPageChange }) => {
   const [activePage, setActiveChange] = useState(1);
 
   const handlePageChange = (page) => {
@@ -12,7 +12,7 @@ const Paging = ({ totalItemsCount, onPageChange}) => {
 
   return (
     <Pagination
-      className="pagination-container"
+      style={{ justifyContent: "center" }}
       activePage={activePage}
       itemsCountPerPage={10} // 한 페이지랑 보여줄 아이템 갯수
       totalItemsCount={totalItemsCount} // 총 아이템 갯수

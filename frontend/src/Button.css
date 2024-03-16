@@ -42,10 +42,10 @@
     background-color: #FF8C00;
 }
 
+
 .writebutton {
     margin-top: 20px;
-    margin-left : 8px;
-    display: inline-block;
+    display: block;
     padding: 10px 20px;
     background-color: #008CBA;
     color: white;
@@ -56,11 +56,15 @@
     cursor: pointer;
     text-decoration: none;
     transition: background-color 0.3s;
+    margin-left: auto;
 }
 
 /* 마우스 호버 시 배경색 변화 */
 .writebutton:hover {
     background-color: #0073e6;
+}
+.parent-element {
+    text-align: right;
 }
 
 body {
@@ -90,7 +94,7 @@ body {
     background-color : #45a049;
     color : white;
     font-size : 30px;
-    width : 330px;
+    width : 340px;
     height : 70px;
     border : none;
 }
@@ -99,7 +103,7 @@ body {
     background-color: #000000;
     color : white;
     font-size : 30px;
-    width : 330px;
+    width : 340px;
     height : 70px;
     border : none;
 }
@@ -124,10 +128,10 @@ body {
     cursor:pointer;
 }
 
+  
 .disabled-write-button {
     margin-top: 20px;
-    margin-left : 8px;
-    display: inline-block;
+    display: block;
     padding: 10px 20px;
     background-color: #6d6d6d;
     color: white;
@@ -135,11 +139,10 @@ body {
     font-size: 16px;
     border: none;
     border-radius: 5px;
+    cursor: pointer;
     text-decoration: none;
     transition: background-color 0.3s;
-    cursor: pointer;
-    pointer-events: none;
-    outline: none;
+    margin-left: auto;
 }
 
 .disabled-write-button:hover::before {

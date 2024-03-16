@@ -85,11 +85,22 @@ const LoginForm = () => {
             회원가입
           </button>
           <div></div>
-          <Link to="/find-id" style={{ color: "gray" }}>
+          <Link
+            to="/find-id"
+            style={{
+              color: "gray",
+              margin: "20px 10px 0",
+            }}
+          >
             아이디 찾기
           </Link>
-          <div></div>
-          <Link to="/find-password" style={{ color: "gray" }}>
+          <Link
+            to="/find-password"
+            style={{
+              color: "gray",
+              margin: "20px 10px 0",
+            }}
+          >
             비밀번호 찾기
           </Link>
         </div>

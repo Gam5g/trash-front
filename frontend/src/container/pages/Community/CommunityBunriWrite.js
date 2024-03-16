@@ -2,6 +2,10 @@ import React from "react";
 import CommunityWrite from "../../../components/CommunityWrite";
 
 const CommunityBunriWrite = () => {
-  return <CommunityWrite posttype="bunri" />;
+  return (
+    <div>
+      <CommunityWrite posttype="bunri" />
+    </div>
+  );
 };
 export default CommunityBunriWrite;
