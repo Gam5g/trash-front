@@ -67,3 +67,12 @@
     line-height: 1.6;
     margin-top: 20px;
   }
+
+  @font-face {
+    font-family: 'Pretendard-Bold';
+    src: url("../../../fonts/Pretendard-Bold.woff2") format('truetype');
+  }
+  
+.deleteButton, .listButton{
+    font-family: 'Pretendard-Bold';
+}

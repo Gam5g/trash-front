@@ -267,9 +267,6 @@ const RegisterForm = () => {
             </>
           )}
         </div>
-        <button className="loginbutton" onClick={NavigateToLogin}>
-          로그인
-        </button>
         <button
           className="registerbutton"
           onClick={onSubmit}

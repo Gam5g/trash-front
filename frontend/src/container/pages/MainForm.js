@@ -16,10 +16,8 @@ function MainForm() {
   const { register, handleSubmit } = useForm();
 
   const prevInputValueRef = useRef("");
-  const topRef = useRef(null);
   const inputRef = useRef(null);
   const cameraInputRef = useRef(null);
-  const autoRef = useRef < HTMLUListElement > null;
   const handleDragStart = () => setActive(true);
   const handleDragEnd = () => setActive(false);
   const navigate = useNavigate();
@@ -73,9 +71,10 @@ function MainForm() {
     }
   };
   const ScrollToTop = () => {
-    if (topRef.current) {
-      topRef.current.scrollIntoView({ behavior: "smooth" });
-    }
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   };
   const navigateToSearch = (selectedQuery) => {
     navigate(`/search?query=${encodeURIComponent(selectedQuery)}`);
@@ -83,7 +82,7 @@ function MainForm() {
   return (
     <div className="NotDrag" style={{ paddingTop: "50px" }}>
       <h2>찾고자 하는 쓰레기를 검색해보세요!</h2>
-      <div className="trash-search-container" ref={topRef}>
+      <div className="trash-search-container">
         <form
           autoComplete="off"
           onSubmit={handleSubmit(onSubmit)}
@@ -144,28 +143,30 @@ function MainForm() {
       <button onClick={handleButtonClick} className="loginbutton">
         사진 찍기
       </button>
-      <input
-        type="file"
-        ref={inputRef}
-        style={{ display: "none" }}
-        onChange={handleFileChange}
-      />
-      <img
-        src={
-          image
-            ? image
-            : isActive
-              ? "/images/file_upload2.png"
-              : "/images/file_upload.png"
-        }
-        onDragEnter={handleDragStart}
-        onDragOver={handleDragOver}
-        onDragLeave={handleDragEnd}
-        onDrop={handleDrop}
-        onClick={handleImageClick}
-        className="upload-img"
-      />
-      <button onClick={ScrollToTop} className="MoveTopBtn" />
+      <div>
+        <input
+          type="file"
+          ref={inputRef}
+          style={{ display: "none" }}
+          onChange={handleFileChange}
+        />
+        <img
+          src={
+            image
+              ? image
+              : isActive
+                ? "/images/file_upload2.png"
+                : "/images/file_upload.png"
+          }
+          onDragEnter={handleDragStart}
+          onDragOver={handleDragOver}
+          onDragLeave={handleDragEnd}
+          onDrop={handleDrop}
+          onClick={handleImageClick}
+          className="upload-img"
+        />
+        <button onClick={ScrollToTop} className="MoveTopBtn" />
+      </div>
     </div>
   );
 }

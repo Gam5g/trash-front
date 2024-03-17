@@ -24,7 +24,6 @@ const CommunityDetail = ({ posts, postsType }) => {
   const deletePost = async () => {
     if (window.confirm("게시글을 삭제하시겠습니까?")) {
       const updatedPosts = posts.filter((post) => post.id !== id);
-      // 삭제 후 목록으로 이동
       navigate("/community");
       alert("삭제되었습니다.");
     }
@@ -38,9 +37,9 @@ const CommunityDetail = ({ posts, postsType }) => {
           <div className="post-info">
             <p>
               작성자: {post.author} | 조회수: {post.views} | 작성일: {post.date}{" "}
-              | 좋아요: {post.likes} |{" "}
+              | 좋아요: {post.likes}
               {postsType === "nanum" && (
-                <span>나눔 완료 상태: {post.nanum}</span>
+                <span>| 나눔 완료 상태: {post.nanum}</span>
               )}
             </p>
           </div>

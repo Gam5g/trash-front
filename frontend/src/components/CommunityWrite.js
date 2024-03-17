@@ -2,6 +2,7 @@ import React, { useRef, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../container/pages/Community/Community.css";
+import "../Button.css";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
@@ -103,7 +104,7 @@ const CommunityWrite = ({ posttype }) => {
   return (
     <div className="NotDrag">
       <div className="titleWrap" style={{ userSelect: "none" }}>
-        글쓰기
+        {posttype === "bunri" ? "분리수거" : "나눔"} 게시판 글쓰기
       </div>
       <form onSubmit={onSubmit}>
         <div className="write" style={{ userSelect: "none" }}>
@@ -124,7 +125,7 @@ const CommunityWrite = ({ posttype }) => {
             modules={modules}
             formats={formats}
             theme="snow"
-            style={{ width: "800px", height: "150px", marginBottom: "40px" }}
+            style={{ width: "800px", height: "250px", marginBottom: "40px" }}
             placeholder="내용을 입력해주세요."
             value={userInfo.content}
             onChange={onChangeContent}
@@ -138,11 +139,13 @@ const CommunityWrite = ({ posttype }) => {
               name="nanum"
               value="나눔 완료"
               onChange={onChangeNanum}
+              style={{ marginTop: "20px" }}
             />
             나눔 완료
           </label>
         )}
-        <button className="writebutton" type="submit">
+        <div></div>
+        <button className="loginbutton" type="submit">
           등록
         </button>
       </form>

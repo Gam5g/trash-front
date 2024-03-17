@@ -309,6 +309,6 @@ footer {
   src: url("fonts/Pretendard-Bold.woff2") format('truetype');
 }
 
-.search-button, .clear-search-button  {
+.search-button, .clear-search-button, .search-input {
   font-family: 'Pretendard-Bold';
 }

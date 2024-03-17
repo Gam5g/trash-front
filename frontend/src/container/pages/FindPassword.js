@@ -47,6 +47,7 @@ const FindPassword = () => {
       <button className="loginbutton" onClick={navigateToLogin}>
         로그인
       </button>
+      <div></div>
       <Link to="/find-id" style={{ color: "gray" }}>
         아이디 찾기
       </Link>

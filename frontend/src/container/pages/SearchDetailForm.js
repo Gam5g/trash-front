@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import { Trash } from "./trash";
 import Medicine from "./MedicineMap";
 import "../../style.css";
+import MainForm from "./MainForm";
 
 function SearchDetailForm() {
   const location = useLocation();
@@ -15,13 +16,17 @@ function SearchDetailForm() {
     <div className="NotDrag">
       {searchResult ? (
         <div>
-          <h1>검색한 내용의 결과입니다</h1>
           <div>
-            <h2>{searchResult.name}</h2>
+            <h1 style={{ textAlign: "center" }}>{searchResult.name}</h1>
             <img src={searchResult.image} alt={searchResult.name} />
             <p>큰 분류: {searchResult.big}</p>
             <p>작은 분류: {searchResult.small}</p>
-            <p>규칙: {searchResult.rules}</p>
+            <p
+              style={{ textAlign: "center", color: "green", fontSize: "30px" }}
+            >
+              배출 요령
+            </p>
+            <p>{searchResult.rules}</p>
             {searchResult.name === "폐의약품" && (
               <div>
                 <div>
@@ -40,6 +45,7 @@ function SearchDetailForm() {
           <h2 style={{ textAlign: "center" }}>검색 결과가 없습니다.</h2>
         </div>
       )}
+      <MainForm />
     </div>
   );
 }

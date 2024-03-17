@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { LuUserSquare2 } from "react-icons/lu";
 import { useForm } from "react-hook-form";
 import "../../App.css";
+import "../../Button.css";
 
 //https://velog.io/@easyhyun00/Spring-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-Spring-React-DB-%EC%97%B0%EA%B2%B0
 // 스프링-리액트-DB 연동
@@ -21,14 +22,9 @@ const LoginForm = () => {
 
   const [passwordVisible, setPasswordVisible] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const navigate = useNavigate();
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
-  };
-
-  const NavigateToRegister = () => {
-    navigate("../register");
   };
 
   const onSubmit = (data) => {
@@ -74,16 +70,15 @@ const LoginForm = () => {
             </div>
           </div>
           <p style={{ color: "red" }}>{errors.password?.message}</p>
-          <button
-            className="loginbutton"
-            onClick={onSubmit}
-            disabled={isSubmitting}
-          >
-            로그인
-          </button>
-          <button className="registerbutton" onClick={NavigateToRegister}>
-            회원가입
-          </button>
+          <div className="login-container">
+            <button
+              className="loginbutton"
+              onClick={onSubmit}
+              disabled={isSubmitting}
+            >
+              로그인
+            </button>
+          </div>
           <div></div>
           <Link
             to="/find-id"
@@ -102,6 +97,15 @@ const LoginForm = () => {
             }}
           >
             비밀번호 찾기
+          </Link>
+          <Link
+            to="../register"
+            style={{
+              color: "gray",
+              margin: "20px 10px 0",
+            }}
+          >
+            회원가입
           </Link>
         </div>
       </form>

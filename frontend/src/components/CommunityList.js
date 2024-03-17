@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useMediaQuery } from "react-responsive";
 import Paging from "../container/pages/Community/Paging";
 import "../Button.css";
+import "../container/pages/Community/Community.css";
 
 const CommunityList = ({ posts, postType }) => {
+  const isMobile = useMediaQuery({ query: "(max-width: 1000px)" });
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [selectedPost, setSelectedPost] = useState(null);
   const [searchResults, setSearchResults] = useState([]);
@@ -11,6 +14,7 @@ const CommunityList = ({ posts, postType }) => {
   const [query, setQuery] = useState("");
   const [sortBy, setSortBy] = useState("page");
   const [searchBy, setSearchBy] = useState("title");
+  const [width, setWidth] = useState(0);
   const [page, setPage] = useState(1);
   const navigate = useNavigate();
 
@@ -83,7 +87,21 @@ const CommunityList = ({ posts, postType }) => {
   return (
     <>
       <div className="NotDrag">
-        {paginatedPosts.length > 0 && (
+        {isMobile ? (
+          <table style={{ width: "100%" }}>
+            {paginatedPosts.map((post) => (
+              <tr key={post.id} onClick={() => handlePostClick(post)}>
+                <p style={{ fontSize: "24px" }}>{post.title}</p>
+                <div>
+                  <p className="info">
+                    {post.author} | {post.views} | {post.likes} | {post.date} |
+                    {postType === "nanum" && post.nanum}
+                  </p>
+                </div>
+              </tr>
+            ))}
+          </table>
+        ) : (
           <table className="table-container">
             <thead>
               <tr>
@@ -101,8 +119,8 @@ const CommunityList = ({ posts, postType }) => {
                 <tr key={post.id} onClick={() => handlePostClick(post)}>
                   <td>{post.id}</td>
                   <td>
-                    {post.title.length > 12
-                      ? post.title.slice(0, 12) + "..."
+                    {post.title.length > 30
+                      ? post.title.slice(0, 30) + "..."
                       : post.title}
                   </td>
                   <td>{post.author}</td>
@@ -125,10 +143,16 @@ const CommunityList = ({ posts, postType }) => {
             <option value="likes">추천순 정렬</option>
             <option value="views">조회순 정렬</option>
             <option value="date">작성날짜순 정렬</option>
-            <option value="nanum">나눔완료순 정렬</option>
+            {postType === "nanum" && (
+              <option value="nanum">나눔완료순 정렬</option>
+            )}
           </select>
           <div className="search-container">
-            <select value={searchBy} onChange={handleSearchChange}>
+            <select
+              className="searchBy-container"
+              value={searchBy}
+              onChange={handleSearchChange}
+            >
               <option value="title">제목</option>
               <option value="author">글쓴이</option>
             </select>
@@ -143,20 +167,21 @@ const CommunityList = ({ posts, postType }) => {
             <button className="searchbutton" onClick={handleSearch}>
               검색
             </button>
+            {isLoggedIn ? (
+              <button className="writebutton" onClick={NavigateToWrite}>
+                글쓰기
+              </button>
+            ) : (
+              <button
+                className="disabled-write-button"
+                onLoginSuccess={handleLoginSuccess}
+              >
+                글쓰기
+              </button>
+            )}
           </div>
         </div>
-        {isLoggedIn ? (
-          <button className="writebutton" onClick={NavigateToWrite}>
-            글쓰기
-          </button>
-        ) : (
-          <button
-            className="disabled-write-button"
-            onLoginSuccess={handleLoginSuccess}
-          >
-            글쓰기
-          </button>
-        )}
+
         <div>
           <Paging
             totalItemsCount={

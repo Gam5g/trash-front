@@ -13,6 +13,7 @@ import CommunityNanumWrite from "./container/pages/Community/CommunityNanumWrite
 import CommunityBunriWrite from "./container/pages/Community/CommunityBunriWrite";
 import CommunityNanumDetail from "./container/pages/Community/CommunityNanumDetail";
 import CommunityBunriDetail from "./container/pages/Community/CommunityBunriDetail";
+import MyPageForm from "./container/pages/MyPageForm";
 import MedicineForm from "./container/pages/MedicineForm";
 import SearchDetailForm from "./container/pages/SearchDetailForm";
 
@@ -30,6 +31,7 @@ function App() {
           <Route path="/search" element={<SearchDetailForm />} />
           <Route path="/community-nanum" element={<CommunityNanumList />} />
           <Route path="/community-bunri" element={<CommunityBunriList />} />
+          <Route path="/my-page" element={<MyPageForm />} />
           <Route
             path="/community-nanum/:id"
             element={<CommunityNanumDetail />}

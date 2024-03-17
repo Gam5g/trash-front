@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../../style.css";
+import "../../Button.css";
 
 const { kakao } = window;
 
@@ -79,6 +80,7 @@ const MedicineMap = () => {
   const [map, setMap] = useState(null);
   const [clickedPosition, setClickedPosition] = useState(null);
   const [positions, setPositions] = useState(initialPositions);
+  const [activeRegion, setActiveRegion] = useState("서구");
 
   useEffect(() => {
     const container = document.getElementById("map");
@@ -114,6 +116,7 @@ const MedicineMap = () => {
         showWindow.open(mapObj, marker);
       });
     });
+    toggleMarker("서구");
   }, []);
 
   const toggleMarker = (subregion) => {
@@ -121,14 +124,20 @@ const MedicineMap = () => {
       (position) => position.subregion === subregion
     );
     setPositions(filteredPositions);
-    map.setLevel(6);
+    if (map) {
+      map.setLevel(6);
+    }
     if (filteredPositions.length > 0) {
       const center = new kakao.maps.LatLng(
         filteredPositions[0].mapy,
         filteredPositions[0].mapx
       );
-      map.panTo(center);
+      if (map) {
+        map.panTo(center);
+      }
+      setClickedPosition(filteredPositions[0]);
     }
+    setActiveRegion(subregion);
   };
 
   const handlePositionClick = (position) => {
@@ -140,11 +149,61 @@ const MedicineMap = () => {
 
   return (
     <div className="NotDrag">
-      <div id="map" style={{ width: "500px", height: "500px" }}></div>
-      <button onClick={() => toggleMarker("서구")}>서구</button>
-      <button onClick={() => toggleMarker("달서구")}>달서구</button>
-      <button onClick={() => toggleMarker("북구")}>북구</button>
-      <button onClick={() => toggleMarker("남구")}>남구</button>
+      <div id="map" style={{ width: "660px", height: "500px" }}></div>
+      <button
+        className={`region-button ${activeRegion === "서구" ? "active" : ""}`}
+        onClick={() => toggleMarker("서구")}
+      >
+        서구
+      </button>
+      <button
+        className={`region-button ${activeRegion === "달서구" ? "active" : ""}`}
+        onClick={() => toggleMarker("달서구")}
+      >
+        달서구
+      </button>
+      <button
+        className={`region-button ${activeRegion === "북구" ? "active" : ""}`}
+        onClick={() => toggleMarker("북구")}
+      >
+        북구
+      </button>
+      <button
+        className={`region-button ${activeRegion === "남구" ? "active" : ""}`}
+        onClick={() => toggleMarker("남구")}
+      >
+        남구
+      </button>
+      <button
+        className={`region-button ${activeRegion === "수성구" ? "active" : ""}`}
+        onClick={() => toggleMarker("수성구")}
+      >
+        수성구
+      </button>
+      <button
+        className={`region-button ${activeRegion === "달성군" ? "active" : ""}`}
+        onClick={() => toggleMarker("달성군")}
+      >
+        달성군
+      </button>
+      <button
+        className={`region-button ${activeRegion === "중구" ? "active" : ""}`}
+        onClick={() => toggleMarker("중구")}
+      >
+        중구
+      </button>
+      <button
+        className={`region-button ${activeRegion === "동구" ? "active" : ""}`}
+        onClick={() => toggleMarker("동구")}
+      >
+        동구
+      </button>
+      <button
+        className={`region-button ${activeRegion === "군위군" ? "active" : ""}`}
+        onClick={() => toggleMarker("군위군")}
+      >
+        군위군
+      </button>
       <div
         style={{
           display: "grid",

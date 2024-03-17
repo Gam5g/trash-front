@@ -56,6 +56,11 @@
   }
 }
 
+.login-container {
+  display: flex;
+  align-items: center;
+}
+
 .titleWrap {
   margin-top: 88px;
   margin-bottom: 10px;
@@ -73,7 +78,7 @@
 }
 
 .inputWrap {
-  width: 300px;
+  width: 400px;
   height: 30px;
   display: flex;
   border-radius: 8px;
@@ -89,7 +94,7 @@
 
 .inputContent {
   border:none;
-  width : 300px;
+  width : 400px;
   padding-left: 10px;
   font-size:20px;
 }
@@ -106,3 +111,13 @@
 .NotDrag {
   user-select: none;
 }
+
+@font-face {
+  font-family: 'Pretendard-Bold';
+  src: url("fonts/Pretendard-Bold.woff2") format('truetype');
+}
+
+.inputContent {
+  font-family: 'Pretendard-Bold';
+}
+
