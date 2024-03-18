@@ -91,11 +91,17 @@ const CommunityList = ({ posts, postType }) => {
           <table style={{ width: "100%" }}>
             {paginatedPosts.map((post) => (
               <tr key={post.id} onClick={() => handlePostClick(post)}>
-                <p style={{ fontSize: "24px" }}>{post.title}</p>
+                <p className="title">
+                  {post.title.length > 40
+                    ? post.title.slice(0, 40) + "..."
+                    : post.title}
+                </p>
                 <div>
                   <p className="info">
-                    {post.author} | {post.views} | {post.likes} | {post.date} |
-                    {postType === "nanum" && post.nanum}
+                    {post.author} | 조회수 {post.views} | 추천수 {post.likes} |{" "}
+                    {post.date}
+                    {postType === "nanum" &&
+                      (post.nanum === "O" ? " | 나눔 완료" : " | 나눔 진행 중")}
                   </p>
                 </div>
               </tr>
