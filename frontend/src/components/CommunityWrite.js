@@ -37,6 +37,10 @@ const CommunityWrite = ({ posttype }) => {
     });
   };
 
+  const NavigateToList = () => {
+    navigate(`/community-${posttype}`);
+  };
+
   const modules = useMemo(() => {
     return {
       toolbar: {
@@ -147,6 +151,9 @@ const CommunityWrite = ({ posttype }) => {
         <div></div>
         <button className="loginbutton" type="submit">
           등록
+        </button>
+        <button className="cancelbutton" onClick={NavigateToList}>
+          취소
         </button>
       </form>
     </div>
