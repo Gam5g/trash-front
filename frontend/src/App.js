@@ -16,6 +16,8 @@ import CommunityBunriDetail from "./container/pages/Community/CommunityBunriDeta
 import MyPageForm from "./container/pages/MyPageForm";
 import MedicineForm from "./container/pages/MedicineForm";
 import SearchDetailForm from "./container/pages/SearchDetailForm";
+import SwaggerDocs from "./SwaggerDocs";
+import NotFound from "./container/pages/NotFound";
 
 function App() {
   return (
@@ -23,8 +25,8 @@ function App() {
       <Router>
         <Routes>
           <Route exact path="/" element={<MainForm />} />
-          <Route path="/register" element={<RegisterForm />} />
-          <Route path="/login" element={<LoginForm />} />
+          <Route path="/api/auth/sign-up" element={<RegisterForm />} />
+          <Route path="/api/auth/sign-in" element={<LoginForm />} />
           <Route path="/find-id" element={<FindID />} />
           <Route path="/find-password" element={<FindPassword />} />
           <Route path="/station" element={<Station />} />
@@ -49,8 +51,10 @@ function App() {
             element={<CommunityBunriWrite />}
           />
           <Route path="/medicine-location" element={<MedicineForm />} />
+          <Route path="/*" element={<NotFound />} />
         </Routes>
       </Router>
+      <SwaggerDocs />
     </div>
   );
 }

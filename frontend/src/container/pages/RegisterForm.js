@@ -1,5 +1,4 @@
 import React, { useRef, useState } from "react";
-import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { VscCopilot } from "react-icons/vsc";
@@ -7,6 +6,7 @@ import { MdAlternateEmail } from "react-icons/md";
 import { LuUserSquare2 } from "react-icons/lu";
 import { RiLockPasswordFill, RiLockPasswordLine } from "react-icons/ri";
 import { useForm } from "react-hook-form";
+import axios from "axios";
 import "../../App.css";
 //https://velog.io/@easyhyun00/Spring-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-Spring-React-DB-%EC%97%B0%EA%B2%B0
 // 스프링-리액트-DB 연동
@@ -25,13 +25,13 @@ const RegisterForm = () => {
     },
   });
 
-  const onSubmit = (data) => {
+  /*   const onSubmit = (data) => {
     const newUserId = parseInt(data.userId) + 1;
     console.log(data);
-    fetch(`url`, {
+    axios({
       method: "POST",
-      headers: { "Content-type": "application/json" },
-      body: JSON.stringify({
+      url: `http://3.39.190.90/api/auth/sign-up`,
+      data: JSON.stringify({
         userId: newUserId,
         id: data.id,
         password: data.password,
@@ -44,9 +44,52 @@ const RegisterForm = () => {
       .then((res) => res.json())
       .then(() => {
         alert(`회원가입 완료! 로그인 후 이용해주세요.`);
-        navigate("../login");
+        navigate("../api/auth/sign-in");
+      });
+  }; */
+
+  const onSubmit = (data) => {
+    const newUserId = parseInt(data.userId) + 1;
+    console.log(data);
+    axios
+      .post(
+        `http://3.39.190.90/api/auth/sign-up`,
+        {
+          accountName: data.id,
+          password: data.password,
+          email: data.email,
+        },
+        {
+          url: `http://3.39.190.90/api/auth/sign-up`,
+        }
+      )
+      .then((response) => {
+        alert(`회원가입 완료! 로그인 후 이용해주세요.`);
+        localStorage.setItem("token", response.data.jwt);
+        navigate("../api/auth/sign-in");
+      })
+      .catch((error) => {
+        if (axios.isAxiosError(error)) {
+          // AxiosError를 처리
+          console.error("Axios Error:", error.response);
+          if (error.response) {
+            // 응답이 있는 경우
+            console.error("응답 데이터:", error.response.data);
+            console.error("응답 상태 코드:", error.response.status);
+          } else if (error.request) {
+            // 요청은 보냈지만 응답이 없는 경우
+            console.error("요청 데이터:", error.request);
+          } else {
+            // 오류를 발생시킨 요청을 설정하는 중에 오류가 발생한 경우
+            console.error("오류를 발생시킨 요청 설정:", error.message);
+          }
+        } else {
+          // 기타 오류 처리
+          console.error("기타 오류 발생:", error.message);
+        }
       });
   };
+
   const password = useRef({});
   password.current = watch("password", "");
 
@@ -116,11 +159,11 @@ const RegisterForm = () => {
                 },
                 minLength: {
                   value: 5,
-                  message: "아이디는 최소 5자 이상입니다.",
+                  message: "아이디는 최소 5글자입니다.",
                 },
                 maxLength: {
                   value: 12,
-                  message: "아이디는 최대 12자 이하입니다",
+                  message: "아이디는 최대 12글자입니다",
                 },
               })}
             />
@@ -138,7 +181,7 @@ const RegisterForm = () => {
               placeholder="비밀번호"
               {...register("password", {
                 required: "비밀번호는 필수 입력입니다.",
-                pattern: {
+                /*                 pattern: {
                   value:
                     /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^*+=-])[a-zA-Z0-9!@#$%^*+=-]+$/,
                   message:
@@ -146,12 +189,12 @@ const RegisterForm = () => {
                 },
                 minLength: {
                   value: 8,
-                  message: "비밀번호는 최소 8자 이상입니다.",
+                  message: "비밀번호는 최소 8글자입니다.",
                 },
                 maxLength: {
                   value: 15,
-                  message: "비밀번호는 최대 15자 이하입니다.",
-                },
+                  message: "비밀번호는 최대 15글자입니다.",
+                }, */
               })}
             />
             <div onClick={togglePasswordVisibility}>
@@ -193,10 +236,10 @@ const RegisterForm = () => {
               placeholder="이메일"
               {...register("email", {
                 required: "이메일은 필수 입력입니다.",
-                pattern: {
+                /* pattern: {
                   value: /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/,
                   message: "올바른 이메일 형식이 아닙니다.",
-                },
+                }, */
               })}
             />
           </div>
@@ -219,11 +262,11 @@ const RegisterForm = () => {
                 },
                 minLength: {
                   value: 2,
-                  message: "닉네임은 최소 2자 이상입니다.",
+                  message: "닉네임은 최소 2글자입니다.",
                 },
                 maxLength: {
                   value: 8,
-                  message: "닉네임은 최대 8자 이상입니다.",
+                  message: "닉네임은 최대 8글자입니다.",
                 },
               })}
             />

@@ -47,7 +47,7 @@ const Header = () => {
                   {isLoggedIn ? (
                     <a href="/">로그아웃</a>
                   ) : (
-                    <a href="/login">로그인</a>
+                    <a href="/api/auth/sign-in">로그인</a>
                   )}
                 </li>
                 <li>
@@ -77,7 +77,7 @@ const Header = () => {
               {isLoggedIn ? (
                 <a href="/">로그아웃</a>
               ) : (
-                <a href="/login">로그인</a>
+                <a href="/api/auth/sign-in">로그인</a>
               )}
             </li>
             <span className="separator">|</span>

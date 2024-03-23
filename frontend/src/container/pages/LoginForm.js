@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { LuUserSquare2 } from "react-icons/lu";
@@ -22,14 +23,49 @@ const LoginForm = () => {
 
   const [passwordVisible, setPasswordVisible] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
 
-  const onSubmit = (data) => {
-    console.log(data);
-    setIsLoggedIn(true);
+  const onSubmit = async (data) => {
+    try {
+      const response = await axios.post(
+        "http://3.39.190.90/api/auth/sign-in",
+        { accountName: data.id, password: data.password },
+        {
+          headers: { "Content-type": "application/json" },
+        }
+      );
+      const token = response.data.token;
+      saveToken(token);
+      setIsLoggedIn(true);
+      navigate("../../../");
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        // AxiosError를 처리
+        console.error("Axios Error:", error.response);
+        if (error.response) {
+          // 응답이 있는 경우
+          console.error("응답 데이터:", error.response.data);
+          console.error("응답 상태 코드:", error.response.status);
+        } else if (error.request) {
+          // 요청은 보냈지만 응답이 없는 경우
+          console.error("요청 데이터:", error.request);
+        } else {
+          // 오류를 발생시킨 요청을 설정하는 중에 오류가 발생한 경우
+          console.error("오류를 발생시킨 요청 설정:", error.message);
+        }
+      } else {
+        // 기타 오류 처리
+        console.error("기타 오류 발생:", error.message);
+      }
+    }
+  };
+
+  const saveToken = (token) => {
+    localStorage.setItem("token", token);
   };
 
   return (
@@ -99,7 +135,7 @@ const LoginForm = () => {
             비밀번호 찾기
           </Link>
           <Link
-            to="../register"
+            to="../api/auth/sign-up"
             style={{
               color: "gray",
               margin: "20px 10px 0",
