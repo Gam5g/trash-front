@@ -7,7 +7,7 @@
 .container_body {
   padding-top : 1100px;
   display: grid;
-  align-items: flex-start;
+  place-items: center;
   height: 200vh; /* 필요에 따라 높이 설정 */
 }
 

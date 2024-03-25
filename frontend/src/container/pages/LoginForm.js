@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { LuUserSquare2 } from "react-icons/lu";
 import { useForm } from "react-hook-form";
+import axios from "axios";
 import "../../App.css";
 import "../../Button.css";
 
@@ -29,39 +29,26 @@ const LoginForm = () => {
     setPasswordVisible(!passwordVisible);
   };
 
-  const onSubmit = async (data) => {
-    try {
-      const response = await axios.post(
+  const onSubmit = (e, formData) => {
+    e.preventDefault();
+    axios
+      .post(
         "http://3.39.190.90/api/auth/sign-in",
-        { accountName: data.id, password: data.password },
         {
-          headers: { "Content-type": "application/json" },
+          accountName: formData.id,
+          password: formData.password,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
         }
-      );
-      const token = response.data.token;
-      saveToken(token);
-      setIsLoggedIn(true);
-      navigate("../../../");
-    } catch (error) {
-      if (axios.isAxiosError(error)) {
-        // AxiosError를 처리
-        console.error("Axios Error:", error.response);
-        if (error.response) {
-          // 응답이 있는 경우
-          console.error("응답 데이터:", error.response.data);
-          console.error("응답 상태 코드:", error.response.status);
-        } else if (error.request) {
-          // 요청은 보냈지만 응답이 없는 경우
-          console.error("요청 데이터:", error.request);
-        } else {
-          // 오류를 발생시킨 요청을 설정하는 중에 오류가 발생한 경우
-          console.error("오류를 발생시킨 요청 설정:", error.message);
-        }
-      } else {
-        // 기타 오류 처리
-        console.error("기타 오류 발생:", error.message);
-      }
-    }
+      )
+      .then((res) => res.json())
+      .then((res) => {
+        localStorage.setItem("Authorization", res.access_token);
+        navigate("/");
+      });
   };
 
   const saveToken = (token) => {

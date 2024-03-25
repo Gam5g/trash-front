@@ -8,9 +8,6 @@ import { RiLockPasswordFill, RiLockPasswordLine } from "react-icons/ri";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import "../../App.css";
-//https://velog.io/@easyhyun00/Spring-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-Spring-React-DB-%EC%97%B0%EA%B2%B0
-// 스프링-리액트-DB 연동
-// 추가 필요사항 : 아이디 중복여부확인, 회원가입 데이터를 백엔드로 보내기(필수)
 
 const RegisterForm = () => {
   const {
@@ -25,69 +22,32 @@ const RegisterForm = () => {
     },
   });
 
-  /*   const onSubmit = (data) => {
-    const newUserId = parseInt(data.userId) + 1;
-    console.log(data);
-    axios({
-      method: "POST",
-      url: `http://3.39.190.90/api/auth/sign-up`,
-      data: JSON.stringify({
-        userId: newUserId,
-        id: data.id,
-        password: data.password,
-        nickname: data.nickname,
-        email: data.email,
-        region: data.region,
-        subregion: data.subRegion, // subregion인지 subRegion인지 확인 필요
-      }),
-    })
-      .then((res) => res.json())
-      .then(() => {
-        alert(`회원가입 완료! 로그인 후 이용해주세요.`);
-        navigate("../api/auth/sign-in");
-      });
-  }; */
-
-  const onSubmit = (data) => {
-    const newUserId = parseInt(data.userId) + 1;
-    console.log(data);
+  const onSubmit = (formData) => {
     axios
       .post(
-        `http://3.39.190.90/api/auth/sign-up`,
+        "http://3.39.190.90/api/auth/sign-up",
         {
-          accountName: data.id,
-          password: data.password,
-          email: data.email,
+          id: formData.id,
+          password: formData.password,
+          email: formData.email,
         },
         {
-          url: `http://3.39.190.90/api/auth/sign-up`,
+          headers: {
+            "Content-Type": "application/json",
+          },
         }
       )
       .then((response) => {
-        alert(`회원가입 완료! 로그인 후 이용해주세요.`);
-        localStorage.setItem("token", response.data.jwt);
-        navigate("../api/auth/sign-in");
-      })
-      .catch((error) => {
-        if (axios.isAxiosError(error)) {
-          // AxiosError를 처리
-          console.error("Axios Error:", error.response);
-          if (error.response) {
-            // 응답이 있는 경우
-            console.error("응답 데이터:", error.response.data);
-            console.error("응답 상태 코드:", error.response.status);
-          } else if (error.request) {
-            // 요청은 보냈지만 응답이 없는 경우
-            console.error("요청 데이터:", error.request);
-          } else {
-            // 오류를 발생시킨 요청을 설정하는 중에 오류가 발생한 경우
-            console.error("오류를 발생시킨 요청 설정:", error.message);
-          }
-        } else {
-          // 기타 오류 처리
-          console.error("기타 오류 발생:", error.message);
+        if (response.status !== 200) {
+          throw new Error("Network response was not ok");
         }
-      });
+        return response.data;
+      })
+      .then((result) => {
+        console.log("결과:", result);
+        navigate("../login");
+      })
+      .catch((error) => console.error("에러:", error));
   };
 
   const password = useRef({});
