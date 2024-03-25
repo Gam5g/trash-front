@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
-import Input from "../../Input";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import "../../App.css";
@@ -15,12 +14,10 @@ const RegisterForm = () => {
     password: "",
     passwordconfirm: "",
     nickname: "",
-    //phone: "",
     region: "",
     subregion: "",
   });
 
-  const { register, watch } = useForm();
   const [idError, setIdError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [passwordConfirmError, setPasswordConfirmError] = useState("");
@@ -74,7 +71,7 @@ const RegisterForm = () => {
     const newPassword = e.target.value;
     setForm({
       ...form,
-      newPassword: newPassword,
+      password: newPassword,
     });
     passwordCheckHandler(form.password);
   };
@@ -259,7 +256,7 @@ const RegisterForm = () => {
     } else return;
 
     axios
-      .post("http://localhost:8080/users", {
+      .post("http://3.39.190.90/api/auth/sign-up", {
         id: form.id,
         password: form.password,
         nickname: form.nickname,
@@ -279,15 +276,13 @@ const RegisterForm = () => {
       });
   };
 
-  console.log(watch("id"));
-
   return (
     <>
       <div className="titleWrap"> 회원가입 </div>
       <div>
         <div className="contentWrap">
           <div className="inputTitle">아이디</div>
-          <Input
+          <input
             onChange={onChangeIdHandler}
             type="text"
             id="id"
@@ -296,7 +291,6 @@ const RegisterForm = () => {
             placeholder="아이디"
             maxLength={12}
             className="inputWrap"
-            ref={register}
           />
           {idError && (
             <div className={isIdAvailable ? "Available" : "message"}>
@@ -304,7 +298,7 @@ const RegisterForm = () => {
             </div>
           )}
           <div className="inputTitle">비밀번호 입력</div>
-          <Input
+          <input
             onChange={onChangePasswordHandler}
             type={passwordVisible ? "text" : "password"}
             id="password"
@@ -323,7 +317,7 @@ const RegisterForm = () => {
             </div>
           )}
           <div className="inputTitle">비밀번호 확인</div>
-          <Input
+          <input
             onChange={onChangePasswordConfirmHandler}
             type={passwordConfirmVisible ? "text" : "password"}
             id="passwordconfirm"
@@ -345,7 +339,7 @@ const RegisterForm = () => {
           )}
         </div>
         <div className="inputTitle">닉네임</div>
-        <Input
+        <input
           onChange={onChangeNicknameHandler}
           type="text"
           id="nickname"

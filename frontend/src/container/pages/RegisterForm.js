@@ -22,12 +22,17 @@ const RegisterForm = () => {
     },
   });
 
-  const onSubmit = (formData) => {
+  const onSubmit = () => {
+    const formData = {
+      id: watch("id"),
+      password: watch("password"),
+      email: watch("email"),
+    };
     axios
       .post(
         "http://3.39.190.90/api/auth/sign-up",
         {
-          id: formData.id,
+          accountName: formData.id,
           password: formData.password,
           email: formData.email,
         },
@@ -45,9 +50,11 @@ const RegisterForm = () => {
       })
       .then((result) => {
         console.log("결과:", result);
-        navigate("../login");
+        navigate("../api/auth/sign-in");
       })
-      .catch((error) => console.error("에러:", error));
+      .catch((error) => {
+        console.error("에러:", error);
+      });
   };
 
   const password = useRef({});
@@ -99,10 +106,7 @@ const RegisterForm = () => {
   return (
     <div className="NotDrag">
       <div className="titleWrap"> 회원가입 </div>
-      <form
-        autoComplete="off"
-        onSubmit={handleSubmit((data) => console.log(data))}
-      >
+      <form autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
         <div className="contentWrap">
           <div className="inputWrap">
             <LuUserSquare2 style={{ height: "30px" }} />
