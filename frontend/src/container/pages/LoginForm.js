@@ -5,34 +5,37 @@ import { RiLockPasswordLine } from "react-icons/ri";
 import { LuUserSquare2 } from "react-icons/lu";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import { useAuthDispatch } from "../../AuthContext";
 import "../../App.css";
 import "../../Button.css";
-
-//https://velog.io/@easyhyun00/Spring-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-Spring-React-DB-%EC%97%B0%EA%B2%B0
-// 스프링-리액트-DB 연동
-// 필요시 카카오 연동 로그인 또는 네이버 연동 로그인도 필요할 듯.
 
 const LoginForm = () => {
   const {
     register,
-    formState: { isSubmitting, errors },
+    formState: { errors },
+    watch,
     handleSubmit,
   } = useForm({
     mode: "onChange",
   });
 
-  const [passwordVisible, setPasswordVisible] = useState("");
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [passwordVisible, setPasswordVisible] = useState(false);
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useAuthDispatch();
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
 
-  const onSubmit = (e, formData) => {
-    e.preventDefault();
-    axios
-      .post(
+  const onSubmit = async () => {
+    const formData = {
+      id: watch("id"),
+      password: watch("password"),
+    };
+    setIsLoading(true);
+    try {
+      const response = await axios.post(
         "http://3.39.190.90/api/auth/sign-in",
         {
           accountName: formData.id,
@@ -43,18 +46,28 @@ const LoginForm = () => {
             "Content-Type": "application/json",
           },
         }
-      )
-      .then((res) => res.json())
-      .then((res) => {
-        localStorage.setItem("Authorization", res.access_token);
-        navigate("/");
-      });
-  };
+      );
 
-  const saveToken = (token) => {
-    localStorage.setItem("token", token);
-  };
+      if (response.status !== 200) {
+        throw new Error("Network response was not ok");
+      }
 
+      const { accessToken, refreshToken } = response.data.result;
+      localStorage.setItem("accessToken", accessToken);
+      localStorage.setItem("refreshToken", refreshToken);
+      dispatch({ type: "LOGIN" });
+      navigate("../");
+    } catch (error) {
+      console.error("에러:", error);
+      if (error.response && error.response.status === 403) {
+        console.error("회원정보가 일치하지 않습니다.");
+      } else {
+        console.error("네트워크 응답이 올바르지 않습니다.");
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  };
   return (
     <div className="NotDrag">
       <div className="titleWrap"> 로그인 </div>
@@ -94,11 +107,7 @@ const LoginForm = () => {
           </div>
           <p style={{ color: "red" }}>{errors.password?.message}</p>
           <div className="login-container">
-            <button
-              className="loginbutton"
-              onClick={onSubmit}
-              disabled={isSubmitting}
-            >
+            <button className="loginbutton" type="submit" disabled={isLoading}>
               로그인
             </button>
           </div>

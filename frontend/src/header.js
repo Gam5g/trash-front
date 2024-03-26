@@ -2,12 +2,15 @@ import React, { useState } from "react";
 import "./style.css";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { useMediaQuery } from "react-responsive";
+import { useAuthState } from "./AuthContext";
+import { useAuthDispatch } from "./AuthContext";
 
 const Header = () => {
   const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [width, setWidth] = useState(0);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { isLoggedIn } = useAuthState();
+  const dispatch = useAuthDispatch();
 
   const handleLogoClick = () => {
     window.location.href = "/";
@@ -16,6 +19,10 @@ const Header = () => {
   const closeMenu = () => {
     setIsMenuOpen(false);
     setWidth(0);
+  };
+
+  const handleLogout = () => {
+    dispatch({ type: "LOGOUT" });
   };
 
   return (
@@ -45,7 +52,9 @@ const Header = () => {
                 />
                 <li>
                   {isLoggedIn ? (
-                    <a href="/">로그아웃</a>
+                    <a href="/" onClick={handleLogout}>
+                      로그아웃
+                    </a>
                   ) : (
                     <a href="/api/auth/sign-in">로그인</a>
                   )}

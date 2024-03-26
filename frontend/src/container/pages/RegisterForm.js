@@ -132,9 +132,7 @@ const RegisterForm = () => {
               })}
             />
           </div>
-          <button className="loginbutton" onClick={NavigateToLogin}>
-            아이디 중복확인
-          </button>
+          <button className="loginbutton">아이디 중복확인</button>
           <p style={{ color: "red" }}>{errors.id?.message}</p>
           <div className="inputWrap">
             <RiLockPasswordLine style={{ height: "30px" }} />

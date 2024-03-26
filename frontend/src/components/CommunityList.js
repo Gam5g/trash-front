@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
+import axios from "axios";
+import { useAuthState } from "../AuthContext";
 import Paging from "../container/pages/Community/Paging";
 import "../Button.css";
 import "../container/pages/Community/Community.css";
 
 const CommunityList = ({ posts, postType }) => {
   const isMobile = useMediaQuery({ query: "(max-width: 1000px)" });
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [selectedPost, setSelectedPost] = useState(null);
   const [searchResults, setSearchResults] = useState([]);
   const [isFocused, setIsFocused] = useState(false);
@@ -17,13 +18,10 @@ const CommunityList = ({ posts, postType }) => {
   const [width, setWidth] = useState(0);
   const [page, setPage] = useState(1);
   const navigate = useNavigate();
+  const { isLoggedIn } = useAuthState();
 
   const NavigateToWrite = () => {
     navigate(`/community-${postType}/write`);
-  };
-
-  const handleLoginSuccess = () => {
-    setIsLoggedIn(true);
   };
 
   const handlePostClick = (post) => {
@@ -178,12 +176,7 @@ const CommunityList = ({ posts, postType }) => {
                 글쓰기
               </button>
             ) : (
-              <button
-                className="disabled-write-button"
-                onLoginSuccess={handleLoginSuccess}
-              >
-                글쓰기
-              </button>
+              <button className="disabled-write-button">글쓰기</button>
             )}
           </div>
         </div>
