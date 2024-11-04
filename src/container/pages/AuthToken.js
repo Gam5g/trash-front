@@ -34,7 +34,7 @@ AuthToken.interceptors.response.use(
       originalRequest._retry = true;
       try {
         const response = await axios.post(
-          "http://54.180.237.99/api/auth/token",
+          "https://54.180.237.99/api/auth/token",
           {
             headers: {
               //RefreshToken: `${refreshtoken}`,
